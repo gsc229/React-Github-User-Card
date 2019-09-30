@@ -20,3 +20,18 @@
 .App-link {
   color: #09d3ac;
 }
+
+.followers-list {
+  border: 2px solid yellow;
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.follower {
+  margin: 50px;
+  border: 2px solid grey;
+  padding: 2px;
+}
