@@ -5,13 +5,15 @@ import { Route } from 'react-router-dom';
 import User from './components/User';
 import Followers from './components/Followers';
 import Person from './components/Person';
+import GitHubCalendar from 'react-github-calendar';
 
 class App extends React.Component {
   state = {
     page: 1,
     handle: '',
     user: [],
-    followers: []
+    followers: [],
+    login: ''
   };
 
   componentDidMount = () => {
@@ -20,7 +22,11 @@ class App extends React.Component {
       .then(res => this.setState({ user: res.data }))
       .catch(err => console.log("that dog don't fetch user ", err));
     axios
-      .get(`https://api.github.com/users/gsc229/followers`)
+      .get(`https://api.github.com/users/gsc229`)
+      .then(res => this.setState({ login: res.data.login }))
+      .catch(err => console.log("that dog don't fetch login,", err));
+    axios
+      .get(`https://api.github.com/users/gsc229/followers?page=1&per_page=100`)
 
       .then(res => this.setState({ followers: res.data }))
 
@@ -31,10 +37,11 @@ class App extends React.Component {
     if (prevState.page !== this.state.page) {
       axios
         .get(
-          `https://api.github.com/users/${this.state.handle}/followers?page=${this.state.page}&per_page=100`
+          `https://api.github.com/users/${this.state.login}/followers?page=${this.state.page}&per_page=100`
         )
         .then(res => this.setState({ followers: res.data }))
         .catch(err => console.log("that dog don't fetch users,", err));
+      console.log('COMPOENT UPDATED!!!!');
     }
   };
 
@@ -50,10 +57,15 @@ class App extends React.Component {
       .catch(err => console.log("that dog don't fetch users,", err));
     axios
       .get(
-        `https://api.github.com/users/${this.state.handle}/followers?per_page=100`
+        `https://api.github.com/users/${this.state.handle}/followers?page=1&per_page=100`
       )
       .then(res => this.setState({ followers: res.data }, console.log(res)))
       .catch(err => console.log("that dog don't fetch users,", err));
+    console.log(
+      'App.js: handle submit: this.state.handle (user)',
+      this.state.handle
+    );
+    this.setState({ login: this.state.handle });
   };
 
   handleProfileClick = event => {
@@ -62,7 +74,6 @@ class App extends React.Component {
     axios
       .get(`https://api.github.com/users/${event.target.id}`)
       .then(res => this.setState({ user: res.data }))
-
       .catch(err => console.log("that dog don't fetch users,", err));
     axios
       .get(
@@ -71,12 +82,14 @@ class App extends React.Component {
       .then(res => this.setState({ followers: res.data }, console.log(res)))
       .catch(err => console.log("that dog don't fetch users,", err));
     this.setState({ page: 1 });
+    this.setState({ login: event.target.id });
   };
 
   clickNext = event => {
     event.preventDefault();
     const numFollowers = this.state.user.followers;
     const pgNum = this.state.page;
+
     if (numFollowers / 100 > pgNum) {
       this.setState({ page: this.state.page + 1 });
     }
@@ -107,7 +120,8 @@ class App extends React.Component {
             <button>Git User Info</button>
           </form>
 
-          <User userData={this.state.user} />
+          <User login={this.state.login} userData={this.state.user} />
+
           <Followers
             page={this.state.page}
             clickNext={this.clickNext}
