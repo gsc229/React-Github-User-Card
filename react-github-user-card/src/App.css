@@ -22,8 +22,20 @@
 }
 
 .followers-list {
+  border: 2px solid red;
+}
+
+.paginate {
+  border: 2px solid blue;
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.followers-container {
   border: 2px solid yellow;
-  width: 50%;
+  width: 75%;
   margin: 0 auto;
   display: flex;
   flex-flow: row wrap;
