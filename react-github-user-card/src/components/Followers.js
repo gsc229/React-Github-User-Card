@@ -10,6 +10,7 @@ const Followers = ({
 }) => {
   return (
     <div className='followers-list list'>
+      <h3>Followers:</h3>
       <div className='paginate'>
         <button onClick={clickPrev}>&lt;&lt;&lt;</button>
         <h4>page: {page}</h4>

@@ -6,7 +6,7 @@ import User from './components/User';
 import Followers from './components/Followers';
 import Person from './components/Person';
 import GitHubCalendar from 'react-github-calendar';
-
+// handle comes from the search bar input, login comes from user
 class App extends React.Component {
   state = {
     page: 1,
@@ -20,11 +20,12 @@ class App extends React.Component {
     axios
       .get(`https://api.github.com/users/gsc229`)
       .then(res => this.setState({ user: res.data }))
+      .then(res => this.setState({ login: res.data.login }))
       .catch(err => console.log("that dog don't fetch user ", err));
-    axios
+    /* axios
       .get(`https://api.github.com/users/gsc229`)
       .then(res => this.setState({ login: res.data.login }))
-      .catch(err => console.log("that dog don't fetch login,", err));
+      .catch(err => console.log("that dog don't fetch login,", err)); */
     axios
       .get(`https://api.github.com/users/gsc229/followers?page=1&per_page=100`)
 
@@ -66,6 +67,7 @@ class App extends React.Component {
       this.state.handle
     );
     this.setState({ login: this.state.handle });
+    this.setState({ handle: '' });
   };
 
   handleProfileClick = event => {
@@ -110,17 +112,23 @@ class App extends React.Component {
     return (
       <div className='App'>
         <Route exact path='/'>
-          <form onSubmit={this.handleSubmit} action=''>
-            <input
-              placeholder='Enter a github handle here'
-              type='text'
-              onChange={this.handleChange}
-              value={this.state.handle}
-            />
-            <button>Git User Info</button>
-          </form>
+          <div className='form-container'>
+            <form onSubmit={this.handleSubmit} action=''>
+              <input
+                placeholder='Enter a github handle here'
+                type='text'
+                onChange={this.handleChange}
+                value={this.state.handle}
+              />
+              <button>Search Github Handle</button>
+            </form>
+          </div>
 
-          <User login={this.state.login} userData={this.state.user} />
+          <User
+            handle={this.state.handle}
+            login={this.state.login}
+            userData={this.state.user}
+          />
 
           <Followers
             page={this.state.page}
