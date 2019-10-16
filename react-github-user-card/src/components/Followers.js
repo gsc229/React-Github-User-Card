@@ -6,14 +6,23 @@ const Followers = ({
   handleProfileClick,
   page,
   clickNext,
-  clickPrev
+  clickPrev,
+  user
 }) => {
+  const follwersTotal = user.followers;
+  const pages = num => {
+    if (num > 100) {
+      return Math.ceil(num / 100);
+    } else return 1;
+  };
   return (
     <div className='followers-list list'>
       <h3>Followers:</h3>
       <div className='paginate'>
         <button onClick={clickPrev}>&lt;&lt;&lt;</button>
-        <h4>page: {page}</h4>
+        <h4>
+          page: {page} of {pages(follwersTotal)}
+        </h4>
         <button onClick={clickNext}>&gt;&gt;&gt;</button>
       </div>
       <div className='followers-container container'>

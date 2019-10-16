@@ -22,10 +22,7 @@ class App extends React.Component {
       .then(res => this.setState({ user: res.data }))
       .then(res => this.setState({ login: res.data.login }))
       .catch(err => console.log("that dog don't fetch user ", err));
-    /* axios
-      .get(`https://api.github.com/users/gsc229`)
-      .then(res => this.setState({ login: res.data.login }))
-      .catch(err => console.log("that dog don't fetch login,", err)); */
+
     axios
       .get(`https://api.github.com/users/gsc229/followers?page=1&per_page=100`)
 
@@ -136,6 +133,7 @@ class App extends React.Component {
             clickPrev={this.clickPrev}
             followersData={this.state.followers}
             handleProfileClick={this.handleProfileClick}
+            user={this.state.user}
           />
         </Route>
 
