@@ -21,7 +21,7 @@ const Followers = ({
       <div className='paginate'>
         <button onClick={clickPrev}>&lt;&lt;&lt;</button>
         <h4>
-          page: {page} of {pages(follwersTotal)}
+          page: {page} / {pages(follwersTotal)}
         </h4>
         <button onClick={clickNext}>&gt;&gt;&gt;</button>
       </div>
