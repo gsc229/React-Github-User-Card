@@ -1,0 +1,103 @@
+.App {
+  text-align: center;
+  height: fit-content;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+/* .user-container {
+  border: 2px solid pink;
+  display: flex;
+  justify-content: space-evenly;
+} */
+
+.form-container {
+  /* border: 2px solid lime; */
+
+  width: 30%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+form {
+  border: 3px solid black;
+}
+button {
+  height: 3vh;
+  background: #24292e;
+  color: whitesmoke;
+  border: none;
+  cursor: pointer;
+}
+input {
+  height: 2.5vh;
+}
+
+.user-info-container {
+  border: 2px solid black;
+  padding: 15px;
+  width: fit-content;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-info {
+  /* border: 2px solid black; */
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+#profile-pic {
+  border: 2px solid black;
+}
+
+#git-hub-calendar {
+  margin-left: 20px;
+}
+
+.followers-list {
+  /* border: 2px solid red; */
+}
+
+.paginate {
+  /* border: 2px solid blue; */
+  width: 20%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.followers-container {
+  /* border: 2px solid yellow; */
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.follower {
+  margin: 50px;
+  border: 2px solid grey;
+  padding: 2px;
+}
